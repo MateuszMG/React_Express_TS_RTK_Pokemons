@@ -1,0 +1,16 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  text-indent: 6px;
+}
+
+.error {
+  color: var(--error);
+  min-height: 16px;
+  text-align: center;
+  word-break: break-all;
+}

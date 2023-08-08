@@ -1,0 +1,11 @@
+.footer {
+  align-items: center;
+  background-color: var(--backgroundPrimary);
+  border-top: 1px solid var(--secondary);
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  letter-spacing: 1px;
+}

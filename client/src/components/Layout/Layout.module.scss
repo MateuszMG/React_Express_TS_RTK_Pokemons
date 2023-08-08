@@ -1,0 +1,12 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px minmax(calc(100vh - 80px), 1fr) 40px;
+  min-height: 100%;
+}
+
+.page {
+  margin: 0 auto;
+  max-width: var(--maxPageWidth);
+  width: 100%;
+}

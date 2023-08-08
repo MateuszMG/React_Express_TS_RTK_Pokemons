@@ -1,0 +1,16 @@
+.icon {
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 24px;
+  transition: 0.3s;
+
+  &:hover {
+    color: var(--colorPrimary);
+  }
+}
+
+.iconWrapper {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}

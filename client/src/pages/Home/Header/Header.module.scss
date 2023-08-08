@@ -1,0 +1,33 @@
+.imageWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 50vh;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.image {
+  background-image: url('../../../assets/images/mobile/640-480pokemonEarth.jpg');
+  background-position: center;
+  background-size: cover;
+  bottom: 0;
+  height: 110%;
+  left: -2%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 110%;
+}
+
+@media (min-width: 640px) {
+  .image {
+    background-image: url('../../../assets/images/tablet/1024-768pokemonEarth.jpg');
+  }
+}
+@media (min-width: 1024px) {
+  .image {
+    background-image: url('../../../assets/images/desktop/pokemonEarth.jpg');
+  }
+}

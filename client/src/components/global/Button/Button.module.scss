@@ -1,0 +1,34 @@
+.button {
+  background-color: var(--backgroundSecondary);
+  border-radius: 8px;
+  border: none;
+  box-shadow: 1px 1px 3px 1px var(--primary);
+  color: var(--fontPrimary);
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin: 6px 12px;
+  padding: 8px 32px;
+  transition: 0.3s;
+  white-space: nowrap;
+
+  &:hover {
+    box-shadow: 2px 2px 3px 3px var(--primary);
+  }
+
+  &:focus {
+    box-shadow: 0 0 3px 1px var(--primary);
+  }
+}
+
+.disabled {
+  box-shadow: none;
+  cursor: auto;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}

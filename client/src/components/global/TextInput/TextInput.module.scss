@@ -1,0 +1,24 @@
+.input {
+  background-color: var(--backgroundSecondary);
+  border-radius: 8px;
+  border: none;
+  color: var(--colorPrimary);
+  margin: 6px 0;
+  padding: 8px;
+  text-indent: 4px;
+  transition: box-shadow 0.2s;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--primary);
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  &:focus {
+    box-shadow: 0 0 5px 2px var(--primary);
+    outline: none;
+    text-indent: 6px;
+  }
+}
