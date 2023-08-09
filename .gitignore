@@ -13,3 +13,4 @@ server/yarn-debug.log*
 server/yarn-error.log*
 
 .DS_Store
+/notes.md

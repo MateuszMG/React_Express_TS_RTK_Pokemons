@@ -1,49 +1,49 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
-import { pageLimitOptions } from '../../../utils/config/const';
+import {
+  defaultPage,
+  defaultPageSize,
+  defaultPageSizeOption,
+  pageSizeOptions,
+} from '../../../utils/config/const';
 
 import { NextIcon, PreviousIcon } from '../Icon/Icon';
 import { SelectInput } from '../SelectInput/SelectInput';
 import styles from './Pagination.module.scss';
 
-export interface HandleRefetchData {
-  limit: number;
+export interface HandleRefetchFilter {
+  pageSize: number;
   page: number;
 }
 
 interface PaginationProps {
-  children?: ReactNode;
-  handleRefetch: (data: HandleRefetchData) => void;
-  limit: number;
+  handleRefetch: (data: HandleRefetchFilter) => void;
+  loading: boolean;
   page: number;
   total: number;
 }
 
 export const Pagination = ({
-  children,
   handleRefetch,
-  limit,
+  loading,
   page,
   total,
 }: PaginationProps) => {
-  const [newLimit, setNewLimit] = useState(limit);
+  const [pageSize, setPageSize] = useState(defaultPageSize);
 
-  const pageCount = Math.ceil(total / limit);
+  const pageCount = Math.ceil(total / pageSize);
 
   const handlePageChange = (newPage: number) => {
-    handleRefetch({
-      limit: newLimit,
-      page: newPage,
-    });
+    if (loading) return;
+    handleRefetch({ pageSize, page: newPage });
   };
 
-  const handleLimitChange = (newLimit: number) => {
-    setNewLimit(newLimit);
-    handleRefetch({ limit: newLimit, page: 0 });
+  const handlePageSizeChange = (newPageSize: number) => {
+    if (loading) return;
+    setPageSize(newPageSize);
+    handleRefetch({ pageSize: newPageSize, page: defaultPage });
   };
-
-  if (!total) return null;
 
   return (
     <div className={styles.wrapper}>
@@ -55,17 +55,17 @@ export const Pagination = ({
         nextLabel={<NextIcon />}
         onPageChange={(event) => handlePageChange(event.selected)}
         pageCount={pageCount}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={4}
+        marginPagesDisplayed={1}
         previousLabel={<PreviousIcon />}
         renderOnZeroPageCount={null}
       />
 
       <SelectInput
-        onChange={({ value }) => handleLimitChange(+value)}
-        options={pageLimitOptions}
+        defaultValue={defaultPageSizeOption}
+        onChange={({ value }) => handlePageSizeChange(+value)}
+        options={pageSizeOptions}
       />
-
-      {children}
     </div>
   );
 };
