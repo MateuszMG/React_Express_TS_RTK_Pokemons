@@ -5,10 +5,13 @@ import * as yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { login } from '../../../redux/user/userActions';
 
+const defaultValues: LoginSchema = {
+  email: 'email123@gmail.com',
+  password: 'Password123!',
+};
+
 export const useLogin = () => {
-  const {
-    user: { loading, logged },
-  } = useAppSelector();
+  const { loading, logged } = useAppSelector().user;
   const dispatch = useAppDispatch();
 
   const {
@@ -17,6 +20,7 @@ export const useLogin = () => {
     register,
     reset,
   } = useForm<LoginSchema>({
+    defaultValues: process.env.NODE_ENV === 'development' ? defaultValues : {},
     mode: 'onChange',
     resolver: yupResolver(loginValidation),
   });
@@ -27,9 +31,9 @@ export const useLogin = () => {
 
   return {
     errors,
+    isValid,
     loading,
     logged,
-    isValid,
     onSubmit,
     register,
     reset,
