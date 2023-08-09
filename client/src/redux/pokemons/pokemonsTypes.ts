@@ -43,26 +43,26 @@ export interface PokemonsState {
   totalCount?: number;
 }
 
-export interface Abilities {
+interface Abilities {
   name: string;
   text: string;
   type: string;
 }
 
-export interface Attacks {
-  name: string;
-  cost: string[];
+interface Attacks {
   convertedEnergyCost: number;
+  cost: string[];
   damage: string;
+  name: string;
   text: string;
 }
 
-export interface Weaknesses {
+interface Weaknesses {
   type: string;
   value: string;
 }
 
-export interface Resistances {
+interface Resistances {
   type: string;
   value: string;
 }
@@ -94,7 +94,7 @@ interface Images {
   large: string;
 }
 
-export interface Tcgplayer {
+interface Tcgplayer {
   url: string;
   updatedAt: string;
   prices: {
@@ -114,7 +114,7 @@ export interface Tcgplayer {
   };
 }
 
-export interface Cardmarket {
+interface Cardmarket {
   url: string;
   updatedAt: string;
   prices: {

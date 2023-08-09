@@ -6,6 +6,7 @@ import { Login } from '../pages/Auth/Login/Login';
 import { Register } from '../pages/Auth/Register/Register';
 import { Home } from '../pages/Home/Home';
 import { NotFound } from '../pages/NotFound/NotFound';
+import { Pokemon } from '../pages/Pokemon/Pokemon';
 
 import { paths } from './paths';
 
@@ -37,6 +38,11 @@ export const routesConfig = [
   {
     component: Register,
     path: paths.register,
+    roles: [AppRoles.NOT_LOGGED],
+  },
+  {
+    component: Pokemon,
+    path: paths.pokemon(':pokemonId'),
     roles: [AppRoles.NOT_LOGGED],
   },
 

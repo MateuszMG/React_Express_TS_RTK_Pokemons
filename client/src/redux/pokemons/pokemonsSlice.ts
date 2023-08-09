@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getPokemons } from './pokemonsActions';
-import { PokemonsState } from './pokemonsTypes';
+import { getPokemon, getPokemons } from './pokemonsActions';
+import { Pokemon, PokemonsState } from './pokemonsTypes';
 
 const initialState: PokemonsState = {
   error: undefined,
@@ -15,9 +15,14 @@ const initialState: PokemonsState = {
 export const pokemonsSlice = createSlice({
   name: 'pokemons',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedPokemon: (state, action: PayloadAction<Pokemon | undefined>) => {
+      state.selectedPokemon = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
+      // getPokemons
       .addCase(getPokemons.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -30,6 +35,22 @@ export const pokemonsSlice = createSlice({
       .addCase(getPokemons.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+      })
+      // getPokemon
+      .addCase(getPokemon.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getPokemon.fulfilled, (state, { payload }) => ({
+        ...state,
+        selectedPokemon: payload,
+        loading: false,
+      }))
+      .addCase(getPokemon.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });
+
+export const { setSelectedPokemon } = pokemonsSlice.actions;

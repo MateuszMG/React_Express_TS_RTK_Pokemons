@@ -34,8 +34,8 @@ export const Home = () => {
                 alt={'image ' + name}
                 className={styles.image}
                 loading={'lazy'}
-                src={images.large}
                 onClick={() => navigate(paths.pokemon(id))}
+                src={images.large}
               />
             </div>
           ))

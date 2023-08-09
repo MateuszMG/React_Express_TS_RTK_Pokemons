@@ -36,3 +36,20 @@ export const getPokemons = createAsyncThunk<GetPokemons, GetPokemonsQuery>(
     }
   },
 );
+
+interface GetPokemon {
+  id: string;
+}
+
+export const getPokemon = createAsyncThunk<Pokemon, GetPokemon>(
+  'pokemons/getPokemon',
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${pokemonsApiUrl}/${id}`);
+
+      return res.data.data as Pokemon;
+    } catch (error) {
+      return reduxErrorHandler({ error, rejectWithValue });
+    }
+  },
+);
