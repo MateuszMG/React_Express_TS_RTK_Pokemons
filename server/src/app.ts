@@ -13,6 +13,7 @@ import {
 import { appRateLimiter } from './middlewares/rateLimiter';
 
 import { authRouter } from './routes/api/auth';
+import { pokemonsRouter } from './routes/api/pokemons';
 
 import { logger } from './utils/logger';
 import { metrics } from './utils/metrics';
@@ -33,6 +34,7 @@ app.use(httpRequestCounterHandler);
 app.use(restResponseTimeHistogramHandler);
 
 app.use('/api', authRouter);
+app.use('/api', pokemonsRouter);
 
 app.use(errorHandler);
 
