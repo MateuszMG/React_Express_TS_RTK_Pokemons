@@ -4,8 +4,15 @@ import axios from 'axios';
 import { reduxErrorHandler } from '../../helpers/errors';
 
 import { pokemonsApiUrl } from '../../utils/config/const';
+import { Pokemon } from '../../utils/types/pokemon';
 
-import { Pokemon, PokemonsApiResponse } from './pokemonsTypes';
+interface PokemonsApiResponse {
+  count: number;
+  data: Pokemon[] | [];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+}
 
 interface GetPokemonsQuery {
   page: number;

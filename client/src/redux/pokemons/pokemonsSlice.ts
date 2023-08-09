@@ -1,7 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Pokemon } from '../../utils/types/pokemon';
+
 import { getPokemon, getPokemons } from './pokemonsActions';
-import { Pokemon, PokemonsState } from './pokemonsTypes';
+
+export interface PokemonsState {
+  error: any;
+  loading: boolean;
+  page?: number;
+  pokemons?: Pokemon[];
+  selectedPokemon?: Pokemon;
+  totalCount?: number;
+}
 
 const initialState: PokemonsState = {
   error: undefined,
