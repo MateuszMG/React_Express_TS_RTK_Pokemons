@@ -39,22 +39,25 @@ export const useRegister = () => {
 export const registerValidation = yup.object({
   username: yup
     .string()
-    .required('Username is required')
-    .trim('Username cannot contain leading and trailing spaces')
+    .required()
+    .trim()
     .strict(true)
-    .min(3, 'Username must be at least 3 characters long')
-    .max(40, 'Username cannot exceed 40 characters'),
+    .min(3)
+    .max(40)
+    .label('Username'),
+  email: yup.string().required().lowercase().max(128).email().label('Email'),
   password: yup
     .string()
-    .required('Password is required')
-    .trim('Password cannot contain leading and trailing spaces')
+    .required()
+    .trim()
     .strict(true)
-    .min(6, 'Password must be at least 6 characters long')
-    .max(72, 'Password cannot exceed 72 characters')
+    .min(6)
+    .max(72)
     .matches(
       /^(?=.*[A-Z])(?=.*\d)(?=.*[#$!.%& *?])[A-Za-z\d#$!.%& *?]{6,72}$/,
-      'Password must contain, one uppercase, one number and one special case character: # $ ! . % & * ?',
-    ),
+      'Password must contain, one uppercase, one number and one special case character: # $ ! . % & * ? ',
+    )
+    .label('Password'),
   confirmPassword: yup
     .string()
     .required('Repeat password is required')

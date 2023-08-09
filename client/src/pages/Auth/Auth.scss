@@ -10,5 +10,17 @@
 }
 
 .form {
+  background-color: var(--backgroundPrimary);
+  border-radius: 8px;
+  border: 2px solid var(--primary);
+  padding: 32px;
   width: 300px;
+
+  @media (max-height: 500px) {
+    margin: 16px 0;
+  }
+
+  @media (min-width: 360px) {
+    width: 340px;
+  }
 }

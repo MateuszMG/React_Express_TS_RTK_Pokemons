@@ -23,11 +23,12 @@ export const Login = () => {
         </h2>
 
         <TextInput
-          {...register('username')}
-          data-testid={'input__username'}
-          error={errors?.username?.message}
-          label={'Username'}
-          placeholder={'Your name'}
+          {...register('email')}
+          data-testid={'input__email'}
+          error={errors?.email?.message}
+          label={'Email'}
+          placeholder={'email@email.com'}
+          type={'email'}
         />
 
         <TextInput
@@ -47,6 +48,7 @@ export const Login = () => {
           >
             Reset
           </Button>
+
           <Button
             data-testid={'button__submit'}
             disabled={!isValid}

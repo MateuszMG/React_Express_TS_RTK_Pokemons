@@ -21,6 +21,7 @@ export const Register = () => {
         <h2 className={'title'} data-testid={'text__title'}>
           Register
         </h2>
+
         <TextInput
           {...register('username')}
           data-testid={'input__username'}
@@ -28,6 +29,16 @@ export const Register = () => {
           label={'Username'}
           placeholder={'Your name'}
         />
+
+        <TextInput
+          {...register('email')}
+          data-testid={'input__email'}
+          error={errors?.email?.message}
+          label={'Email'}
+          placeholder={'email@email.com'}
+          type={'email'}
+        />
+
         <TextInput
           {...register('password')}
           data-testid={'input__password'}
@@ -36,6 +47,7 @@ export const Register = () => {
           placeholder={'StrongPassword1!'}
           type={'password'}
         />
+
         <TextInput
           {...register('confirmPassword')}
           data-testid={'input__confirm-password'}
@@ -53,6 +65,7 @@ export const Register = () => {
           >
             Reset
           </Button>
+
           <Button
             data-testid={'button__submit'}
             disabled={!isValid}
