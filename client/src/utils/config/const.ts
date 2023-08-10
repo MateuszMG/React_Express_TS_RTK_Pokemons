@@ -29,5 +29,5 @@ export const defaultPageSizeOption = pageSizeOptions.find(
 );
 
 export enum DayjsFormats {
-  savedRequest = 'HH:mm:ss - DD MMM',
+  savedPokemon = 'HH:mm:ss - DD MMM',
 }
