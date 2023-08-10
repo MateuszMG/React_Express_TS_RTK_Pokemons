@@ -1,6 +1,4 @@
-import mongoose, { model, Schema } from 'mongoose';
-
-import { UserModel } from './user';
+import { model, Schema } from 'mongoose';
 
 export interface PokemonInput {
   pokemonId: string;
@@ -13,6 +11,7 @@ export interface Pokemon extends PokemonInput {
   _id: string;
   createdAt: string;
   updatedAt: string;
+  __v: string;
 }
 
 const pokemonSchema = new Schema<PokemonInput>(

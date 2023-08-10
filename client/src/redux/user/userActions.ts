@@ -5,13 +5,16 @@ import { handleAccessToken, User } from '../../helpers/accessToken';
 import { reduxErrorHandler } from '../../helpers/errors';
 
 import { axios } from '../../utils/config/axios';
+import { Pokemon } from '../../utils/types/pokemon';
 
 import { LoginSchema } from '../../pages/Auth/Login/useLogin';
 import { RegisterSchema } from '../../pages/Auth/Register/useRegister';
 
+import { Pagination, SavedPokemon } from './userSlice';
+
 export const login = createAsyncThunk<User, LoginSchema>(
   'user/login',
-  async (data: LoginSchema, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const res = await axios().post(`/login`, data);
 
@@ -28,7 +31,7 @@ export const login = createAsyncThunk<User, LoginSchema>(
 
 export const register = createAsyncThunk<User, RegisterSchema>(
   'user/register',
-  async (data: RegisterSchema, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const res = await axios().post(`/register`, data);
 
@@ -66,6 +69,68 @@ export const refreshToken = createAsyncThunk(
       return user;
     } catch (error) {
       dispatch(logout());
+    }
+  },
+);
+
+interface GetSavedPokemons {
+  page: number;
+  pageSize: number;
+}
+
+interface GetSavedPokemonsParams {
+  pageSize: number;
+  page: number;
+}
+
+interface GetSavedPokemons {
+  pagination: Pagination;
+  pokemons: SavedPokemon[];
+}
+
+export const getSavedPokemons = createAsyncThunk<
+  GetSavedPokemons,
+  GetSavedPokemonsParams
+>('user/getSavedPokemons', async (params, { rejectWithValue }) => {
+  try {
+    const res = await axios().get(`/pokemons`, { params });
+
+    return res.data as GetSavedPokemons;
+  } catch (error) {
+    return reduxErrorHandler({ error, rejectWithValue });
+  }
+});
+
+export const savePokemon = createAsyncThunk<SavedPokemon, Pokemon>(
+  'user/savePokemon',
+  async (pokemon, { rejectWithValue }) => {
+    try {
+      const res = await axios().post(`/pokemons`, {
+        imageUrl: pokemon.images.large,
+        name: pokemon.name,
+        pokemonId: pokemon.id,
+      });
+
+      return res.data.pokemon as SavedPokemon;
+    } catch (error) {
+      return reduxErrorHandler({ error, rejectWithValue });
+    }
+  },
+);
+
+interface DeletePokemonParams {
+  id: string;
+}
+
+export const deletePokemon = createAsyncThunk<string, DeletePokemonParams>(
+  'user/deletePokemon',
+  async (params, { rejectWithValue }) => {
+    try {
+      await axios().delete(`/pokemons`, { params });
+
+      return params.id;
+    } catch (error) {
+      return reduxErrorHandler({ error, rejectWithValue });
     }
   },
 );

@@ -17,9 +17,16 @@ const Section = ({ title, value }: SectionProps) => (
 );
 
 export const Pokemon = () => {
-  const { handleSavePokemon, loading, selectedPokemon } = usePokemon();
+  const {
+    handleSavePokemon,
+    isSavedPokemon,
+    logged,
+    pokemonsLoading,
+    selectedPokemon,
+    userLoading,
+  } = usePokemon();
 
-  if (loading || !selectedPokemon)
+  if (pokemonsLoading || !selectedPokemon)
     return (
       <div className={styles.loaderWrapper}>
         <Loader size={48} />
@@ -33,20 +40,25 @@ export const Pokemon = () => {
           alt={'image ' + selectedPokemon.name}
           className={styles.image}
           loading={'lazy'}
-          onClick={handleSavePokemon}
           src={selectedPokemon.images.large}
         />
       </div>
 
-      <div className={styles.buttonWrapper}>
-        <Button>Save {selectedPokemon.name}</Button>
-      </div>
+      {logged && (
+        <div className={styles.buttonWrapper}>
+          <Button onClick={handleSavePokemon} isLoading={userLoading}>
+            {isSavedPokemon
+              ? `${selectedPokemon.name} has been saved`
+              : `Save ${selectedPokemon.name}`}
+          </Button>
+        </div>
+      )}
 
       <div className={styles.sectionWrapper}>
         <h1>Abilities</h1>
         <div>
           {selectedPokemon.abilities?.map((item) => (
-            <div>
+            <div key={item.name}>
               <Section title={'Name'} value={item.name} />
               <Section title={'Type'} value={item.type} />
               <Section title={'Description'} value={item.text} />
@@ -57,8 +69,8 @@ export const Pokemon = () => {
 
       <div className={styles.sectionWrapper}>
         <h1>Attacks</h1>
-        {selectedPokemon.attacks.map((item) => (
-          <div>
+        {selectedPokemon.attacks?.map((item) => (
+          <div key={item.name}>
             <Section title={'Name'} value={item.name} />
             <Section title={'Energy cost'} value={item.convertedEnergyCost} />
             <Section title={'Cost'} value={item.cost.join(', ')} />
@@ -70,15 +82,15 @@ export const Pokemon = () => {
 
       <div className={styles.sectionWrapper}>
         <h1>Weaknesses</h1>
-        {selectedPokemon.weaknesses.map((item) => (
-          <Section title={item.type} value={item.value} />
+        {selectedPokemon.weaknesses?.map((item) => (
+          <Section key={item.type} title={item.type} value={item.value} />
         ))}
       </div>
 
       <div className={`${styles.sectionWrapper} ${styles.withoutBorder}`}>
         <h1>Resistances</h1>
         {selectedPokemon.resistances?.map((item) => (
-          <Section title={item.type} value={item.value} />
+          <Section key={item.type} title={item.type} value={item.value} />
         ))}
       </div>
     </div>

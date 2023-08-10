@@ -28,6 +28,11 @@ export const routesConfig = [
     path: paths.all,
     roles: [AppRoles.EVERYBODY],
   },
+  {
+    component: Pokemon,
+    path: paths.pokemon(':pokemonId'),
+    roles: [AppRoles.EVERYBODY],
+  },
 
   // NOT_LOGGED
   {
@@ -38,11 +43,6 @@ export const routesConfig = [
   {
     component: Register,
     path: paths.register,
-    roles: [AppRoles.NOT_LOGGED],
-  },
-  {
-    component: Pokemon,
-    path: paths.pokemon(':pokemonId'),
     roles: [AppRoles.NOT_LOGGED],
   },
 

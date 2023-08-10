@@ -2,6 +2,10 @@ import express from 'express';
 
 import { pokemonsController } from '../../controllers/pokemons';
 
+import { verifyRoles } from '../../middlewares/verifyRoles';
+
+import { UserRoles } from '../../models/user';
+
 const pokemonsRouter = express.Router();
 
 /**
@@ -30,11 +34,15 @@ const pokemonsRouter = express.Router();
  *      500:
  *        description: Internal server error
  */
-pokemonsRouter.get('/pokemons', pokemonsController.getPokemons);
+pokemonsRouter.get(
+  '/pokemons',
+  verifyRoles([UserRoles.USER]),
+  pokemonsController.getPokemons,
+);
 
 /**
  * @openapi
- * '/api/pokemons':
+ * '/api/pokemons/?id={id}':
  *  post:
  *     tags:
  *     - Pokemons
@@ -57,6 +65,35 @@ pokemonsRouter.get('/pokemons', pokemonsController.getPokemons);
  *      500:
  *        description: Internal server error
  */
-pokemonsRouter.post('/pokemons', pokemonsController.addPokemon);
+pokemonsRouter.post(
+  '/pokemons',
+  verifyRoles([UserRoles.USER]),
+  pokemonsController.addPokemon,
+);
+
+/**
+ * @openapi
+ * '/api/pokemons':
+ *  post:
+ *     tags:
+ *     - Pokemons
+ *     summary: Delete pokemon
+ *     parameters:
+ *      - name: id
+ *        in: path
+ *        default: mongooseId
+ *     responses:
+ *      204:
+ *        description: Success
+ *      400:
+ *        description: Bad request
+ *      500:
+ *        description: Internal server error
+ */
+pokemonsRouter.delete(
+  '/pokemons',
+  verifyRoles([UserRoles.USER]),
+  pokemonsController.deletePokemon,
+);
 
 export { pokemonsRouter };

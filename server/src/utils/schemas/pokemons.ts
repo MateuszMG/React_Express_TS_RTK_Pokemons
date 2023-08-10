@@ -1,4 +1,7 @@
+import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
+
+import { errorMessages } from '../errors/errorMessages';
 
 const pokemonId = yup
   .string()
@@ -25,7 +28,14 @@ const name = yup
   .label('Pokemon name');
 
 const pageSize = yup.number().default(10).min(1).max(50).label('Limit');
-const page = yup.number().default(0).min(0).label('Page');
+const page = yup.number().default(1).min(1).label('Page');
+
+const id = yup
+  .string()
+  .required()
+  .test('mongoId', errorMessages.invalidParams, (value) =>
+    isValidObjectId(value),
+  );
 
 /**
  * @openapi
@@ -103,4 +113,22 @@ export const addPokemonSchema = yup.object({
   pokemonId,
   imageUrl,
   name,
+});
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    DeletePokemonInput:
+ *      type: object
+ *      required:
+ *        - id
+ *      properties:
+ *        id:
+ *          type: string
+ *          default: mongooseId
+ */
+
+export const deletePokemonSchema = yup.object({
+  id,
 });

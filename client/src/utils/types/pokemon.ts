@@ -8,8 +8,8 @@ export interface Pokemon {
   types: string[];
 
   abilities?: Abilities[];
-  attacks: Attacks[];
-  weaknesses: Weaknesses[];
+  attacks?: Attacks[];
+  weaknesses?: Weaknesses[];
   resistances?: Resistances[];
 
   images: Images;

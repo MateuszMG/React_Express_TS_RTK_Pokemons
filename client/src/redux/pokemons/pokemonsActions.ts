@@ -14,7 +14,7 @@ interface PokemonsApiResponse {
   totalCount: number;
 }
 
-interface GetPokemonsQuery {
+interface GetPokemonsParams {
   page: number;
   pageSize: number;
 }
@@ -25,17 +25,19 @@ interface GetPokemons {
   totalCount: number;
 }
 
-export const getPokemons = createAsyncThunk<GetPokemons, GetPokemonsQuery>(
+export const getPokemons = createAsyncThunk<GetPokemons, GetPokemonsParams>(
   'pokemons/getPokemons',
-  async ({ page, pageSize }, { rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     try {
-      const res = await axios.get(
-        `${pokemonsApiUrl}?page=${page}&pageSize=${pageSize}`,
-      );
+      const res = await axios.get(pokemonsApiUrl, { params });
 
-      const { data, totalCount } = res.data as PokemonsApiResponse;
+      const { data, page, totalCount } = res.data as PokemonsApiResponse;
 
-      const payload: GetPokemons = { page, pokemons: data, totalCount };
+      const payload: GetPokemons = {
+        page,
+        pokemons: data,
+        totalCount,
+      };
 
       return payload;
     } catch (error) {
