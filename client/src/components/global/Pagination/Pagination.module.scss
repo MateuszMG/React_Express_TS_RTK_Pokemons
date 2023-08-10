@@ -11,7 +11,9 @@
   align-items: center;
   cursor: pointer;
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
+  justify-content: center;
 
   & {
     line-height: 50%;

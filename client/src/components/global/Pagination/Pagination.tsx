@@ -42,6 +42,7 @@ export const Pagination = ({
   const handlePageSizeChange = (newPageSize: number) => {
     if (loading) return;
     setPageSize(newPageSize);
+    if (total < newPageSize) return;
     handleRefetch({ pageSize: newPageSize, page: defaultPage });
   };
 
@@ -52,11 +53,11 @@ export const Pagination = ({
         breakLabel={'...'}
         className={styles.pagination}
         forcePage={--page}
+        marginPagesDisplayed={1}
         nextLabel={<NextIcon />}
         onPageChange={(event) => handlePageChange(event.selected)}
         pageCount={pageCount}
         pageRangeDisplayed={4}
-        marginPagesDisplayed={1}
         previousLabel={<PreviousIcon />}
         renderOnZeroPageCount={null}
       />
