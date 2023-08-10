@@ -4,7 +4,7 @@ import { UserRoles } from '../utils/config/const';
 
 import { LocalStorage } from './LocalStorage';
 
-export interface DecodedJWT {
+interface DecodedJWT {
   _id: string;
   exp: number;
   iat: number;
@@ -16,7 +16,7 @@ export interface User extends DecodedJWT {
   logged: boolean;
 }
 
-export const emptyUser: User = {
+const emptyUser: User = {
   _id: '',
   accessToken: '',
   exp: 0,

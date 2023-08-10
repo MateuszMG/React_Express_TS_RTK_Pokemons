@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import { reduxErrorHandler } from '../../helpers/errors';
+import { LocalStorage } from '../../helpers/LocalStorage';
 
 import { pokemonsApiUrl } from '../../utils/config/const';
 import { Pokemon } from '../../utils/types/pokemon';
@@ -19,7 +20,7 @@ interface GetPokemonsParams {
   pageSize: number;
 }
 
-interface GetPokemons {
+export interface GetPokemons {
   page: number;
   pokemons: Pokemon[];
   totalCount: number;
@@ -38,6 +39,8 @@ export const getPokemons = createAsyncThunk<GetPokemons, GetPokemonsParams>(
         pokemons: data,
         totalCount,
       };
+
+      LocalStorage.add('pokemons', payload);
 
       return payload;
     } catch (error) {

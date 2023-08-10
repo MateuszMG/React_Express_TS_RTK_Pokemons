@@ -1,13 +1,13 @@
-type LSKeys = 'accessToken';
+type LocalStorageKeys = 'accessToken' | 'pokemons';
 
 export class LocalStorage {
-  static get = (key: LSKeys) => {
+  static get = (key: LocalStorageKeys) => {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : null;
   };
 
-  static add = (key: LSKeys, value: object | string | null) =>
+  static add = (key: LocalStorageKeys, value: object | string | null) =>
     localStorage.setItem(key, JSON.stringify(value));
 
-  static remove = (key: LSKeys) => localStorage.removeItem(key);
+  static remove = (key: LocalStorageKeys) => localStorage.removeItem(key);
 }

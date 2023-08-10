@@ -73,17 +73,12 @@ export const refreshToken = createAsyncThunk(
   },
 );
 
-interface GetSavedPokemons {
-  page: number;
-  pageSize: number;
-}
-
 interface GetSavedPokemonsParams {
   pageSize: number;
   page: number;
 }
 
-interface GetSavedPokemons {
+export interface GetSavedPokemons {
   pagination: Pagination;
   pokemons: SavedPokemon[];
 }
