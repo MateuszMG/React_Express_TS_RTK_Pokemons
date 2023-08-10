@@ -64,7 +64,9 @@ export const Pagination = ({
 
       <SelectInput
         defaultValue={defaultPageSizeOption}
-        onChange={({ value }) => handlePageSizeChange(+value)}
+        onChange={(option) =>
+          option?.value && handlePageSizeChange(+option.value)
+        }
         options={pageSizeOptions}
       />
     </div>
