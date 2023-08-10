@@ -12,7 +12,7 @@ interface LoaderProps {
   testId?: string;
 }
 
-export const Loader = ({ size, testId }: LoaderProps) => {
+export const Loader = ({ size, testId = '' }: LoaderProps) => {
   return (
     <PulseLoader
       className={styles.loader}
