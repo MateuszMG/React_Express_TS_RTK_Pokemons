@@ -56,45 +56,57 @@ export const Pokemon = () => {
         </div>
       )}
 
-      <div className={styles.sectionWrapper}>
-        <h1>Abilities</h1>
-        <div>
-          {selectedPokemon.abilities?.map((item) => (
-            <div key={item.name}>
+      {selectedPokemon.abilities?.length && (
+        <div className={styles.chapter}>
+          <h1>Abilities</h1>
+          <div>
+            {selectedPokemon.abilities.map((item) => (
+              <div key={item.name} className={styles.sectionWrapper}>
+                <Section title={'Name'} value={item.name} />
+                <Section title={'Type'} value={item.type} />
+                <Section title={'Description'} value={item.text} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {selectedPokemon.attacks?.length && (
+        <div className={styles.chapter}>
+          <h1>Attacks</h1>
+          {selectedPokemon.attacks?.map((item) => (
+            <div key={item.name} className={styles.sectionWrapper}>
               <Section title={'Name'} value={item.name} />
-              <Section title={'Type'} value={item.type} />
+              <Section title={'Energy cost'} value={item.convertedEnergyCost} />
+              <Section title={'Cost'} value={item.cost.join(', ')} />
+              <Section title={'Damage'} value={item.damage} />
               <Section title={'Description'} value={item.text} />
             </div>
           ))}
         </div>
-      </div>
+      )}
 
-      <div className={styles.sectionWrapper}>
-        <h1>Attacks</h1>
-        {selectedPokemon.attacks?.map((item) => (
-          <div key={item.name}>
-            <Section title={'Name'} value={item.name} />
-            <Section title={'Energy cost'} value={item.convertedEnergyCost} />
-            <Section title={'Cost'} value={item.cost.join(', ')} />
-            <Section title={'Damage'} value={item.damage} />
-            <Section title={'Description'} value={item.text} />
-          </div>
-        ))}
-      </div>
+      {selectedPokemon.weaknesses?.length && (
+        <div className={styles.chapter}>
+          <h1>Weaknesses</h1>
+          {selectedPokemon.weaknesses?.map((item) => (
+            <div key={item.type} className={styles.sectionWrapper}>
+              <Section key={item.type} title={item.type} value={item.value} />
+            </div>
+          ))}
+        </div>
+      )}
 
-      <div className={styles.sectionWrapper}>
-        <h1>Weaknesses</h1>
-        {selectedPokemon.weaknesses?.map((item) => (
-          <Section key={item.type} title={item.type} value={item.value} />
-        ))}
-      </div>
-
-      <div className={`${styles.sectionWrapper} ${styles.withoutBorder}`}>
-        <h1>Resistances</h1>
-        {selectedPokemon.resistances?.map((item) => (
-          <Section key={item.type} title={item.type} value={item.value} />
-        ))}
-      </div>
+      {selectedPokemon.resistances?.length && (
+        <div className={styles.chapter}>
+          <h1>Resistances</h1>
+          {selectedPokemon.resistances?.map((item) => (
+            <div key={item.type} className={styles.sectionWrapper}>
+              <Section title={item.type} value={item.value} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
