@@ -68,6 +68,7 @@ export const Pagination = ({
           option?.value && handlePageSizeChange(+option.value)
         }
         options={pageSizeOptions}
+        testId={'pagination'}
       />
     </div>
   );
