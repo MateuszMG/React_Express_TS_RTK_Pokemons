@@ -1,4 +1,4 @@
-import { Loader } from '../../components/global/Loader/Loader';
+import { Loader, LoaderSizes } from '../../components/global/Loader/Loader';
 import { Pagination } from '../../components/global/Pagination/Pagination';
 
 import { PokemonModal } from './PokemonModal/PokemonModal';
@@ -28,7 +28,7 @@ export const Profile = () => {
 
       {loading ? (
         <div className={styles.loaderWrapper}>
-          <Loader size={48} />
+          <Loader size={LoaderSizes.xxl} />
         </div>
       ) : (
         <div className={styles.pokemons}>

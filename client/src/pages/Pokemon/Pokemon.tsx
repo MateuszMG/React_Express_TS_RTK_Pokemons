@@ -1,5 +1,5 @@
 import { Button } from '../../components/global/Button/Button';
-import { Loader } from '../../components/global/Loader/Loader';
+import { Loader, LoaderSizes } from '../../components/global/Loader/Loader';
 
 import styles from './Pokemon.module.scss';
 import { usePokemon } from './usePokemon';
@@ -29,7 +29,7 @@ export const Pokemon = () => {
   if (pokemonsLoading || !selectedPokemon)
     return (
       <div className={styles.loaderWrapper}>
-        <Loader size={48} />
+        <Loader size={LoaderSizes.xxl} />
       </div>
     );
 
@@ -46,11 +46,13 @@ export const Pokemon = () => {
 
       {logged && (
         <div className={styles.buttonWrapper}>
-          <Button onClick={handleSavePokemon} isLoading={userLoading}>
-            {isSavedPokemon
-              ? `${selectedPokemon.name} has been saved`
-              : `Save ${selectedPokemon.name}`}
-          </Button>
+          {isSavedPokemon ? (
+            <h2>{selectedPokemon.name} has been saved</h2>
+          ) : (
+            <Button onClick={handleSavePokemon} isLoading={userLoading}>
+              Save {selectedPokemon.name}
+            </Button>
+          )}
         </div>
       )}
 

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Loader } from '../../components/global/Loader/Loader';
+import { Loader, LoaderSizes } from '../../components/global/Loader/Loader';
 import { Pagination } from '../../components/global/Pagination/Pagination';
 
 import { paths } from '../../routes/paths';
@@ -26,7 +26,7 @@ export const Home = () => {
 
       <div className={styles.pokemons}>
         {loading ? (
-          <Loader size={48} />
+          <Loader size={LoaderSizes.xxl} />
         ) : (
           pokemons?.map(({ id, images, name }) => (
             <div key={id} className={styles.pokemon}>
