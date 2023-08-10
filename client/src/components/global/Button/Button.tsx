@@ -7,11 +7,19 @@ interface GlobalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string | ReactNode;
   isError?: boolean;
   isLoading?: boolean;
+  testId?: string;
 }
 
 export const Button = forwardRef<HTMLButtonElement, GlobalButtonProps>(
   (
-    { children, disabled, isError, isLoading, ...rest }: GlobalButtonProps,
+    {
+      children,
+      disabled,
+      isError,
+      isLoading,
+      testId = '',
+      ...rest
+    }: GlobalButtonProps,
     ref,
   ) => {
     const idDisabled = disabled || isLoading || isError;
@@ -20,10 +28,11 @@ export const Button = forwardRef<HTMLButtonElement, GlobalButtonProps>(
       <button
         {...rest}
         className={`${styles.button} ${idDisabled && styles.disabled}`}
+        data-testid={`button__${testId}`}
         disabled={idDisabled}
         ref={ref}
       >
-        {isLoading ? <Loader /> : children}
+        {isLoading ? <Loader testId={`button--${testId}`} /> : children}
       </button>
     );
   },
