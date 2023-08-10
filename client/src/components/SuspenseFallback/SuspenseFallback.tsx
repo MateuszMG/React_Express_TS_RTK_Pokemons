@@ -3,8 +3,8 @@ import styles from './SuspenseFallback.module.scss';
 
 export const SuspenseFallback = () => {
   return (
-    <div className={styles.page}>
-      <Loader size={LoaderSizes.xxl} />
+    <div className={styles.page} data-testid='page__suspense-fallback'>
+      <Loader size={LoaderSizes.xxl} testId={'suspense-fallback'} />
     </div>
   );
 };

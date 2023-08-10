@@ -9,12 +9,14 @@ export enum LoaderSizes {
 
 interface LoaderProps {
   size?: LoaderSizes;
+  testId?: string;
 }
 
-export const Loader = ({ size }: LoaderProps) => {
+export const Loader = ({ size, testId }: LoaderProps) => {
   return (
     <PulseLoader
       className={styles.loader}
+      data-testid={`loader__${testId}`}
       loading={true}
       size={size || LoaderSizes.s}
     />
