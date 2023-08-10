@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { handleAccessToken, User } from '../../helpers/accessToken';
-import { getFromTheLS } from '../../helpers/localStorage';
+import { LocalStorage } from '../../helpers/LocalStorage';
 
 import {
   deletePokemon,
@@ -35,7 +35,7 @@ interface InitialState extends User {
 }
 
 const createInitialState = (): InitialState => ({
-  ...handleAccessToken(getFromTheLS('accessToken')),
+  ...handleAccessToken(LocalStorage.get('accessToken')),
   error: undefined,
   loading: false,
   pagination: undefined,

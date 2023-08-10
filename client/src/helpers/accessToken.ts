@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 
 import { UserRoles } from '../utils/config/const';
 
-import { addToLS, removeFromLS } from './localStorage';
+import { LocalStorage } from './LocalStorage';
 
 export interface DecodedJWT {
   _id: string;
@@ -34,11 +34,11 @@ export const handleAccessToken = (accessToken: string): User => {
   } catch (error) {}
 
   if (!user) {
-    removeFromLS('accessToken');
+    LocalStorage.remove('accessToken');
     return emptyUser;
   }
 
-  addToLS('accessToken', accessToken);
+  LocalStorage.add('accessToken', accessToken);
 
   return { ...user!, accessToken, logged: true };
 };
