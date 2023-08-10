@@ -36,7 +36,7 @@ export const Pagination = ({
 
   const handlePageChange = (newPage: number) => {
     if (loading) return;
-    handleRefetch({ pageSize, page: newPage });
+    handleRefetch({ pageSize, page: ++newPage });
   };
 
   const handlePageSizeChange = (newPageSize: number) => {
@@ -51,7 +51,7 @@ export const Pagination = ({
         activeClassName={styles.active}
         breakLabel={'...'}
         className={styles.pagination}
-        forcePage={page}
+        forcePage={--page}
         nextLabel={<NextIcon />}
         onPageChange={(event) => handlePageChange(event.selected)}
         pageCount={pageCount}
