@@ -16,7 +16,7 @@ export interface User extends DecodedJWT {
   logged: boolean;
 }
 
-const emptyUser: User = {
+export const emptyUser: User = {
   _id: '',
   accessToken: '',
   exp: 0,

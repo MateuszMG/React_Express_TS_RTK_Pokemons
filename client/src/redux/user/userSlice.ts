@@ -27,14 +27,14 @@ export interface Pagination {
   total: number;
 }
 
-interface InitialState extends User {
+export interface UserInitialState extends User {
   error?: any;
   loading: boolean;
   pagination?: Pagination;
   savedPokemons?: SavedPokemon[];
 }
 
-const createInitialState = (): InitialState => ({
+export const createInitialState = (): UserInitialState => ({
   ...handleAccessToken(LocalStorage.get('accessToken')),
   error: undefined,
   loading: false,
@@ -51,7 +51,7 @@ export const userSlice = createSlice({
       //login
       .addCase(login.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(login.fulfilled, (state, { payload }) => ({
         ...state,
@@ -65,7 +65,7 @@ export const userSlice = createSlice({
       //register
       .addCase(register.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(register.fulfilled, (state, { payload }) => ({
         ...state,
@@ -79,7 +79,7 @@ export const userSlice = createSlice({
       //logout
       .addCase(logout.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(logout.fulfilled, (state, { payload }) => ({
         ...state,
@@ -97,7 +97,7 @@ export const userSlice = createSlice({
       //getSavedPokemons
       .addCase(getSavedPokemons.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(getSavedPokemons.fulfilled, (state, { payload }) => ({
         ...state,
@@ -112,7 +112,7 @@ export const userSlice = createSlice({
       //savePokemon
       .addCase(savePokemon.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(savePokemon.fulfilled, (state, { payload }) => ({
         ...state,
@@ -126,7 +126,7 @@ export const userSlice = createSlice({
       //deletePokemon
       .addCase(deletePokemon.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(deletePokemon.fulfilled, (state, { payload }) => ({
         ...state,
