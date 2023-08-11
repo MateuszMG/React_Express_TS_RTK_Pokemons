@@ -24,33 +24,29 @@ export const Login = () => {
 
         <TextInput
           {...register('email')}
-          data-testid={'input__email'}
           error={errors?.email?.message}
           label={'Email'}
           placeholder={'email@email.com'}
+          testId={'email'}
           type={'email'}
         />
 
         <TextInput
           {...register('password')}
-          data-testid={'input__password'}
           error={errors?.password?.message}
           label={'Password'}
           placeholder={'StrongPassword1!'}
+          testId={'password'}
           type={'password'}
         />
 
         <Form.ButtonsWrapper>
-          <Button
-            data-testid={'button__reset'}
-            isLoading={loading}
-            type={'reset'}
-          >
+          <Button testId={'reset'} isLoading={loading} type={'reset'}>
             Reset
           </Button>
 
           <Button
-            data-testid={'button__submit'}
+            testId={'submit'}
             disabled={!isValid}
             isLoading={loading}
             type={'submit'}
