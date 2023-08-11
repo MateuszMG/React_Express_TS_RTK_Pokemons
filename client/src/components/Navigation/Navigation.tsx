@@ -33,7 +33,7 @@ export const Navigation = () => {
   const navigate = useNavigate();
 
   return (
-    <nav>
+    <nav data-testid={'navigation'}>
       <div className={styles.list}>
         <NavigationLink path={paths.home} />
 
